@@ -7,19 +7,15 @@ pipeline {
         choice(name: 'DOCKER_TAG', choices: ['blue', 'green'], description: 'Choose the Docker image tag for the deployment')
         booleanParam(name: 'SWITCH_TRAFFIC', defaultValue: false, description: 'Switch traffic between Blue and Green')
     }
+    
     environment {
-        IMAGE_NAME = "ssiraparapu/bankapp"
+        IMAGE_NAME = "vsiraparapu/bankapp"
         TAG = "${params.DOCKER_TAG}"
         KUBE_NAMESPACE = 'webapps'
         // SCANNER_HOME = tool 'sonar-scanner'
     }
 
     stages {
-        stage('Debug DNS') {
-            steps {
-                sh 'nslookup repo.maven.apache.org || dig repo.maven.apache.org'
-            }
-            }
 
         stage('Permissions') {
             steps {
@@ -29,9 +25,11 @@ pipeline {
        
         stage('Compile') {
             steps {
-                sh "mvn compile"
+                sh "./mvnw compile"
             }
-            stage('Tests') {
+        }
+        
+        stage('Tests') {
             steps {
                 sh "mvn clean test -X -DskipTests=true"
             }
@@ -40,8 +38,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "mvn package -DskipTests=true"
-        }
-        }
+            }
         }
     }
 }
