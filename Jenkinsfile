@@ -17,10 +17,8 @@ pipeline {
     stages {
         stage('mvn install'){
             steps{
-                 docker {
-                    image 'maven:3.8.5-jdk-11'
-        }
-
+                 sh "sudo apt install openjdk-17-jdk -y"
+                 sh "sudo apt install maven -y"
             }
         }
 
