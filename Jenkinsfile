@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+     docker {
+            image 'maven:3.8.5-jdk-11'
+        }
+    }
     
   
     parameters {
@@ -16,11 +21,6 @@ pipeline {
     }
 
     stages {
-                //stage('Debug DNS') {
-        //steps {
-            //sh 'nslookup repo.maven.apache.org || dig repo.maven.apache.org'
-        //}
-       // }
 
         stage('Permissions') {
             steps {
@@ -46,5 +46,4 @@ pipeline {
             }
         }
     }
-}
 
