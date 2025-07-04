@@ -15,6 +15,11 @@ pipeline {
     }
 
     stages {
+        stage('Debug DNS') {
+            steps {
+                sh 'nslookup repo.maven.apache.org || dig repo.maven.apache.org'
+            }
+            }
 
         stage('Permissions') {
             steps {
@@ -24,7 +29,7 @@ pipeline {
        
         stage('Compile') {
             steps {
-                sh "./mvnw compile"
+                sh "mvn compile"
             }
             stage('Tests') {
             steps {
