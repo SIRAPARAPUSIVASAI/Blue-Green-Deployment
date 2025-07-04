@@ -16,7 +16,7 @@ pipeline {
     }
 
     stages {
-                stage('Debug DNS') {
+                stage('Debug DNS') 
         steps {
             sh 'nslookup repo.maven.apache.org || dig repo.maven.apache.org'
           }
@@ -46,4 +46,4 @@ pipeline {
             }
         }
     }
-}
+
