@@ -1,10 +1,6 @@
 pipeline {
     agent any 
 
-     docker {
-            image 'maven:3.8.5-jdk-11'
-        }
-    
     parameters {
         choice(name: 'DEPLOY_ENV', choices: ['blue', 'green'], description: 'Choose which environment to deploy: Blue or Green')
         choice(name: 'DOCKER_TAG', choices: ['blue', 'green'], description: 'Choose the Docker image tag for the deployment')
@@ -19,6 +15,14 @@ pipeline {
     }
 
     stages {
+        stage('mvn install'){
+            steps{
+                 docker {
+                    image 'maven:3.8.5-jdk-11'
+        }
+
+            }
+        }
 
         stage('Permissions') {
             steps {
