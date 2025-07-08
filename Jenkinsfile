@@ -15,12 +15,6 @@ pipeline {
     }
 
     stages {
-        stage('mvn install'){
-            steps{
-                 sh "apt install openjdk-17-jdk -y"
-                 sh "apt install maven -y"
-            }
-        }
 
         stage('Permissions') {
             steps {
