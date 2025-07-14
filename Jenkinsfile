@@ -15,6 +15,12 @@ pipeline {
     }
 
     stages {
+        stage('Debug DNS') {
+            steps {
+                sh 'nslookup repo.maven.apache.org || dig repo.maven.apache.org'
+            }
+        }
+
 
         stage('Permissions') {
             steps {
@@ -59,15 +65,9 @@ pipeline {
                 }
             }
         }
-         stage('Deploy MySQL to Local K8s') {
-            steps {
-                withKubeConfig(credentialsId: 'Jenkins-kubect-config-creds') {
-                    sh 'kubectl apply -f mysql-ds.yml'
-                }
-            }
-         }
     }
 }
+         
 
         
 
