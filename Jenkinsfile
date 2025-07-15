@@ -62,7 +62,7 @@ pipeline {
         }
         stage('Deploy SVC app') {
             steps {
-                withKubeConfig(credentialsId: 'venkat-kubect-config-creds') {
+                withKubeConfig(credentialsId: 'Jenkins-kubect-config-creds') {
                     sh ' kubectl apply -f bankapp-service.yml'
                 }
             }
