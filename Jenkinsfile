@@ -15,18 +15,6 @@ pipeline {
     }
 
     stages {
-        stage('Debug DNS') {
-            steps {
-                sh 'nslookup repo.maven.apache.org || dig repo.maven.apache.org'
-            }
-        }
-
-
-        stage('Permissions') {
-            steps {
-                sh "chmod -R 777 mvnw"
-            }
-        }
        
         stage('Compile') {
             steps {
@@ -34,37 +22,37 @@ pipeline {
             }
         }
         
-        stage('Tests') {
-            steps {
-                sh "mvn clean test -X -DskipTests=true"
-            }
-        }
+        // stage('Tests') {
+        //     steps {
+        //         sh "mvn clean test -X -DskipTests=true"
+        //     }
+        // }
         
-        stage('Build') {
-            steps {
-                sh "mvn package -DskipTests=true"
-            }
-        }
-        stage('Docker Build & tag image') {
-            steps {
-                script{
-                    withDockerRegistry(credentialsId: 'Jenkins-docker-creds') {
-                        sh "docker build -t ${IMAGE_NAME}:${TAG} ."
-                    }
-                }
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh "mvn package -DskipTests=true"
+        //     }
+        // }
+        // stage('Docker Build & tag image') {
+        //     steps {
+        //         script{
+        //             withDockerRegistry(credentialsId: 'Jenkins-docker-creds') {
+        //                 sh "docker build -t ${IMAGE_NAME}:${TAG} ."
+        //             }
+        //         }
+        //     }
+        // }
         
         
-        stage('Docker Push image') {
-            steps {
-                script{
-                    withDockerRegistry(credentialsId: 'Jenkins-docker-creds') {
-                        sh "docker push ${IMAGE_NAME}:${TAG}"
-                    }
-                }
-            }
-        }
+        // stage('Docker Push image') {
+        //     steps {
+        //         script{
+        //             withDockerRegistry(credentialsId: 'Jenkins-docker-creds') {
+        //                 sh "docker push ${IMAGE_NAME}:${TAG}"
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
          
