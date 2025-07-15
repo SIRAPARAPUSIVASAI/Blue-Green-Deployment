@@ -77,7 +77,7 @@ pipeline {
                         deploymentFile = 'app-deployment-green.yml'
                     }
                     
-                    withKubeConfig(credentialsId: 'venkat-kubect-config-creds') {
+                    withKubeConfig(credentialsId: 'Jenkins-kubect-config-creds') {
                        sh "kubectl apply -f ${deploymentFile}"
                     }
                 }
