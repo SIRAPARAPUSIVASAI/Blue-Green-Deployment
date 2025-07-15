@@ -53,6 +53,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy MySQL to Local K8s') {
+            steps {
+                withKubeConfig(credentialsId: 'Jenkins-kubect-config-creds') {
+                    sh 'kubectl apply -f mysql-ds.yml'
+                }
+            }
+        }
     }
 }
          
