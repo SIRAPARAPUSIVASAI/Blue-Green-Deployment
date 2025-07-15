@@ -22,17 +22,17 @@ pipeline {
             }
         }
         
-        // stage('Tests') {
-        //     steps {
-        //         sh "mvn clean test -X -DskipTests=true"
-        //     }
-        // }
+        stage('Tests') {
+            steps {
+                sh "mvn clean test -X -DskipTests=true"
+            }
+        }
         
-        // stage('Build') {
-        //     steps {
-        //         sh "mvn package -DskipTests=true"
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                sh "mvn package -DskipTests=true"
+            }
+        }
         // stage('Docker Build & tag image') {
         //     steps {
         //         script{
